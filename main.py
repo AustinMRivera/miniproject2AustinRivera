@@ -28,3 +28,27 @@ print(f"There are {count} movies directed by Ridley Scott on Netflix.")
 print("The movies are:")
 print(ridley_movies['title'])
 
+# Make a graph to show movies by a few directors
+directors = ['Ridley Scott', 'Martin Scorsese', 'Steven Spielberg', 'Quentin Tarantino']
+counts = []
+
+# Loop through each director and count their movies
+for director in directors:
+    dir_movies = df[(df['type'] == 'Movie') & (df['director'] == director)]
+    counts.append(len(dir_movies))
+
+# Create the bar chart
+plt.figure(figsize=(10, 6))  # Make it a bit bigger
+plt.bar(directors, counts, color=['blue', 'green', 'red', 'purple'])
+plt.title('Number of Movies on Netflix by Selected Directors')
+plt.xlabel('Directors')
+plt.ylabel('Number of Movies')
+plt.xticks(rotation=45)  # Rotate labels for readability
+
+# Save the graph to charts folder
+chart_file = 'charts/director_movies.png'
+plt.savefig(chart_file)
+print(f"Graph saved to {chart_file}")
+
+# Show it 
+plt.show()
